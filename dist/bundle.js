@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>{document.getElementById("app").innerHTML="<p>¡Hola, esta es una aplicación de Express empaquetada con webpack!</p>"}));

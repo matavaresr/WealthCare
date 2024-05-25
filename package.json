@@ -2,14 +2,19 @@
   "dependencies": {
     "express": "^4.19.2"
   },
-  "name": "wealthcare",
-  "version": "0.0.1",
-  "description": "Software enfocado a la Educacion Financiera",
-  "main": "index.js",
-  "devDependencies": {},
-  "scripts": {
-    "start": "node index.js"
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   },
-  "author": "Montantes Brothers",
+  "name": "wealthcare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC"
 }
