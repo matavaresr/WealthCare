@@ -1,5 +1,15 @@
 {
   "dependencies": {
     "express": "^4.19.2"
-  }
+  },
+  "name": "wealthcare",
+  "version": "0.0.1",
+  "description": "Software enfocado a la Educacion Financiera",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Montantes Brothers",
+  "license": "ISC"
 }
