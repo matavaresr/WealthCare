@@ -1,0 +1,42 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title WealthCare
+    link(rel="stylesheet" href='/stylesheets/style.css')
+    link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer")
+  body
+    .container
+      .left
+        .blur
+        .content
+          img(src="/images/logo.png" alt="WealthCare Logo" class="logo")
+          h1 WealthCare
+          p
+            | Tu bienestar financiero comienza aquí.
+            br
+            | Inicia sesión y toma el control de tu futuro
+      .right
+        .login-form
+          h2 Inicia Sesión
+          form(action="/auth/login", method="POST", class="form")
+            label(for="username") Nombre de usuario o Correo electronico
+            input(type="text" id="username" name="username")
+            label(for="password" class="label-left") Contraseña
+            label(for="password" class="label-right")
+              i.fa-solid.fa-eye-slash
+              |  Hide
+            input(type="password" id="password" name="password")
+            .links.b
+              a(href="#") ¿Olvidaste tu contraseña?
+              br
+            button(type="submit") ¡Adelante!
+          .links
+            a(href="#") ¿No tienes cuenta? Registrate
+
+    script.
+      document.querySelector('button').addEventListener('click', function() {
+        window.location.href = '/inicio';
+      });

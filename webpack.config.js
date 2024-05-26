@@ -6,5 +6,13 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'), // Directorio de salida
   },
+  module: {
+    rules: [
+      {
+        test: /\.pug$/,
+        use: 'pug-loader',
+      },
+    ],
+  },
   mode: 'production', // Modo de producción para optimización
 };

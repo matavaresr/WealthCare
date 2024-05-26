@@ -1,0 +1,47 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title WealthCare
+    link(rel="stylesheet" href='/stylesheets/style.css')
+    link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer")
+  body
+    .container
+      .left.b
+        .blur
+        .content
+          img(src="images/logo.png" alt="WealthCare Logo" class="logo")
+          h1 WealthCare
+          p
+            | Únete a WealthCare y empieza tu viaje
+            br
+            | hacia una vida financiera saludable.
+            br
+            | ¡Crea tu cuenta hoy!
+      .right
+        .login-form
+          h2 Crea una cuenta
+          .form
+            label(for="username") Nombre de usuario
+            input(type="text" id="username" name="username")
+            label(for="correo") Correo Electrónico
+            input(type="text" id="correo" name="correo")
+            label.label-left(for="password") Contraseña
+            label.label-right(for="password")
+              i.fa-solid.fa-eye-slash
+              |  Hide
+            input(type="password" id="password" name="password")
+            .links
+              | Usa 8 o más caracteres, recuerda utilizar mayúsculas y simbolos.
+            br
+            .links.c
+              | Para crear tu cuenta estás de acuerdo con
+              br
+              a(href="") Términos de Uso
+              |  y la 
+              a(href="") Poliza de Privacidad
+            button(type="submit") Crea tu cuenta
+          .links.y
+            a(href="#") ¿Ya tienes cuenta? Inicia Sesión

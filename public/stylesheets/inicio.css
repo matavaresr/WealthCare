@@ -1,0 +1,156 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+nav .logo {
+    height: 30px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-right: 35%;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+nav .language {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+.overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.card {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.balance {
+    grid-column: span 2;
+    background-image: url('https://s3-alpha-sig.figma.com/img/abeb/cbbd/7a9799cb0bf53567fd98c23cedd7266a?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=k75IJ9izSdiIUoeDQ2a~7~VW4MBV3Vofixhj0J9JrvdGp4P3ey5jdRERSwPPXQgZrOcnpX6gJtsGAYHn~9ZMX20HaKUT8W4CJHXbMCo0g6np4bsmy0WkOicAUFtHRXXZJx30gzpgbmfgmozVgeuaLQ4LjfDK8g0a1M5bMvAuZP3-u8umNIbdHMChsno4VV7OKvIpaJrGYgqZiwJdWGTHQ6T9Uiuv6LtSFHlkveHqxcVAkSmz9McYIOLMkwCV4WXowWLYq0W~S3zooGhjwMBxg4IyMhui07Bp~Sr1bTh~Zy2ymdra2mjJTopZ2dgQmojlYyTtb5tSKuJuLODW0j1QAQ__');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.balance p {
+    margin: 0.5rem 0;
+}
+
+.accounts img {
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+.news h2 {
+    text-align: left;
+    font-weight: 100;
+    margin-bottom: 2rem;
+}
+
+.news-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.news-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+}
+
+.news-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.news-card p {
+    margin: 0;
+}
+
+.gastos {
+    width: 90%;
+}
+
+.ingresos {
+    width: 90%;
+}
+
+.chart {
+    font: 10px sans-serif;
+    shape-rendering: crispEdges;
+}
+
+.area {
+    fill: steelblue;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.monto_contenedor p {
+    float:  left;
+}
+
+.monto_cuenta {
+    float: right;
+}
+
+.balance_p {
+    font-size: 30px;
+}

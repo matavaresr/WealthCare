@@ -1,0 +1,155 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Dashboard
+    link(rel="stylesheet", href="/stylesheets/inicio.css")
+    link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
+  body
+    header
+      nav
+        img(src="images/logo.png", alt="Logo", class="logo")
+        ul
+          li: a(href="#") Inicio
+          li: a(href="/planes") Planes de Ahorro
+          li: a(href="#") Calculo de Riesgo Financiero
+        .language
+          span Español (Latinoamerica)
+          i(class="fas fa-user-circle")
+    main
+      section.overview
+        .card.balance
+          br
+          h3 Balance
+          p.balance_p $0.0
+          hr
+          p 
+            | Cuentas Asociadas 
+            i(class="fas fa-caret-down")
+          .accounts
+            .montos_contenedor
+              p 
+                .info_cuenta
+                  img(src="https://www.paredro.com/wp-content/uploads/2019/04/https___www.bbva_.com_wp-content_uploads_2019_04_Logo-BBVA.jpg", alt="BBVA") 
+                  | BBVA Bancomer 
+                  .monto_cuenta $0.0
+            .montos_contenedor
+              p 
+                .info_cuenta
+                  img(src="https://belvo.com/wp-content/uploads/2023/07/mercado-pago-logo.png", alt="Mercado Pago")
+                  | Mercado Pago
+                  .monto_cuenta $0.0
+        .card.ingresos
+          h3 Ingresos
+          #chart
+        .card.gastos
+          h3 Gastos
+          #chart2
+      hr
+      section.news
+        h2 Noticias
+        .news-cards
+          .news-card
+            img(src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/04/stonks-2286073.jpg?tf=3840x", alt="Noticia 1")
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          .news-card
+            img(src="https://www.thebalancemoney.com/thmb/gdvxx4u-WPB6pyL9Q3kiJtnmUY4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/notstonks-7d82ebccce6d4960b42b2bc6c1670463.jpeg", alt="Noticia 2")
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          .news-card
+            img(src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/04/stonks-2286073.jpg?tf=3840x", alt="Noticia 3")
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          .news-card
+            img(src="https://www.thebalancemoney.com/thmb/gdvxx4u-WPB6pyL9Q3kiJtnmUY4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/notstonks-7d82ebccce6d4960b42b2bc6c1670463.jpeg", alt="Noticia 4")
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          .news-card
+            img(src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/04/stonks-2286073.jpg?tf=3840x", alt="Noticia 4")
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      
+    #userModal.modal
+    .modal-content
+      span.close &times;
+      h2 Información del Usuario
+      p#userName Nombre: Juan Pérez
+      p#userEmail Correo: juan.perez@example.com
+      p#userPhone Teléfono: 123-456-7890
+
+    script(src="https://d3js.org/d3.v7.min.js")
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        const data = [
+          {date: '2023-01-01', value: 30},
+          {date: '2023-02-01', value: 20},
+          {date: '2023-03-01', value: 50},
+          {date: '2023-04-01', value: 40},
+          {date: '2023-05-01', value: 80},
+          {date: '2023-06-01', value: 70}
+        ];
+
+        const margin = {top: 20, right: 30, bottom: 30, left: 40},
+              width = 325 - margin.left - margin.right,
+              height = 150 - margin.top - margin.bottom;
+
+        const parseDate = d3.timeParse("%Y-%m-%d");
+
+        data.forEach(d => {
+          d.date = parseDate(d.date);
+          d.value = +d.value;
+        });
+
+        const x = d3.scaleTime()
+                    .domain(d3.extent(data, d => d.date))
+                    .range([0, width]);
+
+        const y = d3.scaleLinear()
+                    .domain([0, d3.max(data, d => d.value)])
+                    .range([height, 0]);
+
+        const area = d3.area()
+                       .x(d => x(d.date))
+                       .y0(height)
+                       .y1(d => y(d.value));
+
+        const svg = d3.select("#chart").append("svg")
+                      .attr("width", width + margin.left + margin.right)
+                      .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const svg2 = d3.select("#chart2").append("svg")
+                      .attr("width", width + margin.left + margin.right)
+                      .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+
+        svg.append("path")
+           .datum(data)
+           .attr("class", "area")
+           .attr("d", area);
+
+        svg.append("g")
+           .attr("class", "axis axis--x")
+           .attr("transform", `translate(0,${height})`)
+           .call(d3.axisBottom(x));
+
+        svg.append("g")
+           .attr("class", "axis axis--y")
+           .call(d3.axisLeft(y));
+
+        svg2.append("path")
+           .datum(data)
+           .attr("class", "area")
+           .attr("d", area);
+
+        svg2.append("g")
+           .attr("class", "axis axis--x")
+           .attr("transform", `translate(0,${height})`)
+           .call(d3.axisBottom(x));
+
+        svg2.append("g")
+           .attr("class", "axis axis--y")
+           .call(d3.axisLeft(y));
+
+      });
