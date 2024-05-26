@@ -14,7 +14,6 @@ html(lang="es")
         ul
           li: a(href="#") Inicio
           li: a(href="/planes") Planes de Ahorro
-          li: a(href="#") Calculo de Riesgo Financiero
         .language
           span Español (Latinoamerica)
           i(class="fas fa-user-circle")
@@ -51,21 +50,11 @@ html(lang="es")
       section.news
         h2 Noticias
         .news-cards
-          .news-card
-            img(src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/04/stonks-2286073.jpg?tf=3840x", alt="Noticia 1")
-            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          .news-card
-            img(src="https://www.thebalancemoney.com/thmb/gdvxx4u-WPB6pyL9Q3kiJtnmUY4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/notstonks-7d82ebccce6d4960b42b2bc6c1670463.jpeg", alt="Noticia 2")
-            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          .news-card
-            img(src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/04/stonks-2286073.jpg?tf=3840x", alt="Noticia 3")
-            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          .news-card
-            img(src="https://www.thebalancemoney.com/thmb/gdvxx4u-WPB6pyL9Q3kiJtnmUY4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/notstonks-7d82ebccce6d4960b42b2bc6c1670463.jpeg", alt="Noticia 4")
-            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          .news-card
-            img(src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/04/stonks-2286073.jpg?tf=3840x", alt="Noticia 4")
-            p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        each article in articles
+          .news-card 
+            p #{article.autor}.
+            p(href=article.url) #{article.titulo}.
+            p #{article.fecha}.
       
     #userModal.modal
     .modal-content
