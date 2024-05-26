@@ -1,5 +1,4 @@
 // mongodbOperations.js
-
 const { MongoClient } = require('mongodb');
 
 const uri = "mongodb+srv://DataOwnerApi:4lQ14FEiUOgYc95d@repositorio-financiamen.es7d9dp.mongodb.net/?retryWrites=true&w=majority&appName=Repositorio-FinanciaMente"
@@ -15,26 +14,41 @@ async function connectToMongo() {
     }
 }
 
-async function insertDog(dogData) {
+async function insertUser(userData) {
     const database = client.db("AppCore");
-    const perros = database.collection("Login");
-    const resultado = await perros.insertOne(dogData);
+    const usuarios = database.collection("Login");
+    userData.createdAt = new Date();
+    userData.updatedAt = new Date();
+    const resultado = await usuarios.insertOne(userData);
     return resultado.insertedId;
 }
 
-async function findDogById(id) {
+async function findUserById(id) {
     const database = client.db("AppCore");
-    const perros = database.collection("Login");
-    return await perros.findOne({ _id: id });
+    const usuarios = database.collection("Login");
+    return await usuarios.findOne({ _id: id });
 }
 
+async function loginUser(email, password) {
+    const database = client.db("AppCore");
+    const collection = database.collection("Login");
+    const user = await collection.findOne({email: email});
+
+    if (user && user.password === password) {
+        return user;
+    } else {
+        return "Credenciales incorrectas";
+    }
+}
+    
 async function closeConnection() {
     await client.close();
 }
 
 module.exports = {
     connectToMongo,
-    insertDog,
-    findDogById,
+    insertUser,
+    findUserById,
+    loginUser,
     closeConnection
 };
