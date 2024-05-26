@@ -28,9 +28,8 @@ app.get('/planes', (req, res) => {
     res.render('planes', { title: 'Mi aplicación', message: '¡Hola, mundo!' });
 });
 
-/*
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-*/
