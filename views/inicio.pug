@@ -50,19 +50,12 @@ html(lang="es")
       section.news
         h2 Noticias
         .news-cards
-        each article in articles
-          .news-card 
-            p #{article.autor}.
-            p(href=article.url) #{article.titulo}.
-            p #{article.fecha}.
-      
-    #userModal.modal
-    .modal-content
-      span.close &times;
-      h2 Información del Usuario
-      p#userName Nombre: Juan Pérez
-      p#userEmail Correo: juan.perez@example.com
-      p#userPhone Teléfono: 123-456-7890
+          each article in articles
+            .news-card 
+              p #{article.titulo}
+              p #{article.autor}
+              p #{article.fecha}
+              a(href=article.url) Visita ya!
 
     script(src="https://d3js.org/d3.v7.min.js")
     script.

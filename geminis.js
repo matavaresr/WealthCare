@@ -46,7 +46,7 @@ const {
       ],
     });
   
-    const result = await chatSession.sendMessage("Trae 5 articulos sobre salud financiera con titulo, autor, fecha y url en formato json");
+    const result = await chatSession.sendMessage("Trae 5 articulos sobre salud financiera con titulo, autor, fecha y url en formato json, que las url esten activas");
     const articles = JSON.parse(result.response.text());
     res.render('inicio', { articles });
   }

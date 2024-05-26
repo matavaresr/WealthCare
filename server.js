@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const geminis = require('./geminis.js');
+const mongoOperations = require('./mongodbOperations');
 const { MongoClient } = require('mongodb');
 
 const app = express();
@@ -8,6 +9,15 @@ const app = express();
 // Configura el middleware para analizar cuerpos de formulario y JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Middleware para autenticar sesiones
+function authenticate(req, res, next) {
+    if (req.session && req.session.user) {
+        return next();
+    } else {
+        return res.redirect('/');   
+     }
+}
 
 // Configura el motor de plantillas Pug
 app.set('view engine', 'pug');
@@ -30,7 +40,7 @@ app.get('/signup', (req, res) => {
     res.render('crearCuenta', { title: 'Mi aplicación', message: '¡Hola, mundo!' });
 });
 
-app.get('/planes', (req, res) => {
+app.get('/planes',  (req, res) => {
     res.render('planes', { title: 'Mi aplicación', message: '¡Hola, mundo!' });
 });
 
@@ -40,21 +50,37 @@ app.get('/crearCuenta', (req, res) => {
 
 app.post('/auth/signup', async (req, res) => {
     try {
+        const { email } = req.body;
+
+        // Verifica si el usuario ya existe
+        const exists = await mongoOperations.userExists(email);
+        if (exists) {
+            res.redirect("/");
+        }else{
+            res.redirect("/home");
+        }
         const userId = await mongoOperations.insertUser(req.body);
-        res.send({ userId });
     } catch (e) {
-        res.status(400).send(e.message);
-    }
+        console.log(e);
+    }
 });
 
 app.post('/auth/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await mongoOperations.loginUser(email, password);
-        res.send({ user });
+        if(user == "inicio"){
+            geminis.run(req, res);
+        }else{
+            res.redirect("/");
+        }
     } catch (e) {
-        res.status(400).send(e.message);
+        console.log(e);
     }
+});
+
+app.get('/crearCuenta', (req, res) => {
+    res.render('crearCuenta', { title: 'Mi aplicación', message: '¡Hola, mundo!' });
 });
 
 const PORT = process.env.PORT || 3000;

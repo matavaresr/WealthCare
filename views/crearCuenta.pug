@@ -23,7 +23,7 @@ html(lang="es")
       .right
         .login-form
           h2 Crea una cuenta
-          .form
+          form(action="/auth/signup", method="POST", class="form")
             label(for="username") Nombre de usuario
             input(type="text" id="username" name="username")
             label(for="correo") Correo Electrónico
@@ -44,4 +44,4 @@ html(lang="es")
               a(href="") Poliza de Privacidad
             button(type="submit") Crea tu cuenta
           .links.y
-            a(href="#") ¿Ya tienes cuenta? Inicia Sesión
+            a(href="/") ¿Ya tienes cuenta? Inicia Sesión
