@@ -16,6 +16,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "scripts": {
+    "test": "echo \"No hay pruebas definidas\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
