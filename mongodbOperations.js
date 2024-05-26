@@ -14,6 +14,8 @@ async function connectToMongo() {
     }
 }
 
+
+
 async function insertUser(userData) {
     const database = client.db("AppCore");
     const usuarios = database.collection("Login");
@@ -35,10 +37,17 @@ async function loginUser(email, password) {
     const user = await collection.findOne({email: email});
 
     if (user && user.password === password) {
-        return user;
+        return "inicio";
     } else {
-        return "Credenciales incorrectas";
+        return "index";
     }
+}
+
+async function userExists(email) {
+    const database = client.db("AppCore");
+    const collection = database.collection("Login");
+    const user = await collection.findOne({ email: email });
+    return user !== null;
 }
     
 async function closeConnection() {
@@ -50,5 +59,6 @@ module.exports = {
     insertUser,
     findUserById,
     loginUser,
-    closeConnection
+    closeConnection,
+    userExists
 };
