@@ -14,7 +14,12 @@ async function connectToMongo() {
     }
 }
 
-
+async function getDogtaChart(id) {
+    const database = client.db("UserCore");
+    const perros = database.collection("AccountTransactions");
+    const result = await perros.find({ 'account.link': id }).toArray()
+    return result;
+}
 
 async function insertUser(userData) {
     const database = client.db("AppCore");
@@ -60,5 +65,6 @@ module.exports = {
     findUserById,
     loginUser,
     closeConnection,
-    userExists
+    userExists,
+    getDogtaChart
 };

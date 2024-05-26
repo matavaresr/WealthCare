@@ -4,6 +4,7 @@ html(lang="es")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Planes de Ahorro
+    link(rel="stylesheet", href="/stylesheets/modal.css")
     link(rel="stylesheet", href="/stylesheets/planes.css")
     link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap", rel="stylesheet")
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
@@ -16,7 +17,9 @@ html(lang="es")
           li: a(href="#") Planes de Ahorro
         .language
           span Español (Latinoamerica)
-          i(class="fas fa-user-circle")
+          #userInfo
+            i(class="fas fa-user-circle", style="cursor:pointer", id)
+          i(class="fas as fa-sign-out-alt", style="cursor:pointer", onclick="window.location.href='/'")
     main
       br
       h2 Estructura de Planes de Ahorro
@@ -41,3 +44,31 @@ html(lang="es")
         .plan
           img(src="https://i.ibb.co/Gt2CD3T/image-15.png", alt="Inversiones")
           div Inversiones
+    .modal#userDetailsModal
+      .modal-content
+        span.close-button &times;
+        h2 Perfil
+        p Nombre: Ángel Alfredo Duron Quieoz
+        p Email: angel_freddy@yahoo.com
+
+script.
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // User Details Modal
+    const userModal = document.getElementById('userDetailsModal');
+    const openUserModalButton = document.getElementById('userInfo');
+    const userCloseButton = userModal.querySelector('.close-button');
+
+    openUserModalButton.onclick = function() {
+      userModal.style.display = "block";
+    }
+
+    userCloseButton.onclick = function() {
+      userModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == userModal) {
+        userModal.style.display = "none";
+      }
+    }
+  });

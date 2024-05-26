@@ -15,8 +15,8 @@ function authenticate(req, res, next) {
     if (req.session && req.session.user) {
         return next();
     } else {
-        return res.redirect('/');   
-     }
+        return res.redirect('/');
+    }
 }
 
 // Configura el motor de plantillas Pug
@@ -87,3 +87,16 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+app.post('/getDogtaChart', async (req, res) => {
+    if (!req.body.link) {
+        return res.status(400).json({ error: 'ID is required' });
+    }
+    try {
+        const data = await mongoOperations.getDogtaChart("e23da8e2-f168-4e47-8450-f7542cc80fe2")
+        res.json(data)
+    } catch (e) {
+        console.error("Error:", e);
+        res.status(500).json({ e: 'An error occurred' });
+    }
+})

@@ -180,3 +180,7 @@ main {
 .balance_p {
     font-size: 30px;
 }
+
+#balance {
+    cursor: pointer;
+}
