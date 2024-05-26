@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const geminis = require('./geminis.js');
+const { MongoClient } = require('mongodb');
 
 const app = express();
 
