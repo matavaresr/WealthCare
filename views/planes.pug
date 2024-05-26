@@ -50,9 +50,46 @@ html(lang="es")
         h2 Perfil
         p Nombre: Ángel Alfredo Duron Quieoz
         p Email: angel_freddy@yahoo.com
+    .modal#planModal
+      .modal-content
+        span.close-button &times;
+        h2 Plan de Ahorro Basico
+        p
+          strong Objetivo:
+          br
+          | Ahorrar una cantidad específica cada mes.
+        p
+          strong Características:
+          br
+          ul
+            li Establecer metas de ahorro mensual.
+            li Alertas y recordatorios para realizar aportes.
+            li Visualización del progreso hacia la meta.
+        hr
+        h3 Cotizacion
+        table
+          thead
+            tr
+              th Concepto
+              th $ (MXN)
+          tbody
+            tr
+              td Cantidad a ahorrar por mes
+              td $1,000.00
+            tr
+              td Tus gastos no deben de superar
+              td $3,000.00
+            tr
+              td Gasto libre
+              td $500.00
+
 
 script.
   document.addEventListener('DOMContentLoaded', (event) => {
+    const planButton = document.querySelector('.plan')
+    const planModal = document.getElementById('planModal');
+    const planCloseButton = planModal.querySelector('#planModal > div > span');
+
     // User Details Modal
     const userModal = document.getElementById('userDetailsModal');
     const openUserModalButton = document.getElementById('userInfo');
@@ -67,8 +104,18 @@ script.
     }
 
     window.onclick = function(event) {
-      if (event.target == userModal) {
+      if (event.target == userModal || event.target == planModal) {
         userModal.style.display = "none";
+        planModal.style.display = "none";
       }
     }
+
+    planButton.onclick = function() {
+      planModal.style.display = "block"
+    }
+
+    planCloseButton.onclick = function() {
+        planModal.style.display = "none";
+      }
+
   });
