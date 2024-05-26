@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const mongoOperations = require('./mongodbOperations');
 
 const app = express();
 
@@ -21,8 +20,8 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'Mi aplicación', message: '¡Hola, mundo!' });
 });
 
-app.get('/home', (req, res) => {
-    res.render('inicio', { title: 'Mi aplicación', message: '¡Hola, mundo!' });
+app.get('/home', async (req, res) => {
+    geminis.run(req, res);
 });
 
 app.get('/signup', (req, res) => {
