@@ -120,30 +120,31 @@ html(lang="es")
       });
 script.
   function generateChart (data, id_container) {
-    data = categorizeAndSumByMonth(data)
-      const margin = {top: 20, right: 30, bottom: 30, left: 40},
+    data = categorizeAndSumByMonth(data);
+    const margin = {top: 20, right: 30, bottom: 30, left: 40},
           width = 325 - margin.left - margin.right,
           height = 150 - margin.top - margin.bottom;
 
     const parseDate = d3.timeParse("%Y-%m-%d");
-  
+
     data.forEach(d => {
-      d.month = (d.month);
-      d.total_amount = +d.total_amount;
+        d.month = (d.month);
+        d.total_amount = +d.total_amount;
     });
 
     const x = d3.scaleTime()
                 .domain(d3.extent(data, d => d.month))
                 .range([0, width]);
 
+    const maxY = d3.max(data, d => d.total_amount);
     const y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d.total_amount)])
+                .domain([0, maxY])
                 .range([height, 0]);
 
     const area = d3.area()
-                    .x(d => x(d.month))
-                    .y0(height)
-                    .y1(d => y(d.total_amount));
+                   .x(d => x(d.month))
+                   .y0(height)
+                   .y1(d => y(d.total_amount));
 
     const svg = d3.select(id_container).append("svg")
                   .attr("width", width + margin.left + margin.right)
@@ -152,42 +153,43 @@ script.
                   .attr("transform", `translate(${margin.left},${margin.top})`);
 
     svg.append("path")
-        .datum(data)
-        .attr("class", "area")
-        .attr("d", area);
+       .datum(data)
+       .attr("class", "area")
+       .attr("d", area);
 
     svg.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
+       .attr("class", "axis axis--x")
+       .attr("transform", `translate(0,${height})`)
+       .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b")));
 
+    const yValues = [0, maxY / 2, maxY];
     svg.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y));
+       .attr("class", "axis axis--y")
+       .call(d3.axisLeft(y).tickValues(yValues).tickFormat(d3.format(".2s")));
   }
   function categorizeAndSumByMonth(data) {
-    const result = {};
+      const result = {};
 
-    data.forEach(item => {
-      const date = new Date(item.value_date);
-      const month = date.getMonth() + 1; // Months are zero-based, so add 1
+      data.forEach(item => {
+          const date = new Date(item.value_date);
+          const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`; // Formato "YYYY-MM"
 
-      if (!result[month]) {
-        result[month] = {
-          month: month,
-          total_amount: 0
-        };
-      }
+          if (!result[monthYear]) {
+              result[monthYear] = {
+                  month: date,
+                  total_amount: 0
+              };
+          }
 
-      result[month].total_amount += item.amount;
-    });
+          result[monthYear].total_amount += item.amount;
+      });
 
-    const resultArray = Object.values(result);
+      const resultArray = Object.values(result);
 
-    // Ordenar de menor a mayor por mes
-    resultArray.sort((a, b) => a.month - b.month);
+      // Ordenar de menor a mayor por fecha
+      resultArray.sort((a, b) => a.month - b.month);
 
-    return resultArray;
+      return resultArray;
   }
 
 script.
